@@ -76,6 +76,7 @@ button:active { opacity: .8; }
 <div class="container">
 
 <h1>🎬 AI Comedy Studio</h1>
+<p>Website test successful!</p>
 <p class="subtitle">Turn your characters into comedy stars!</p>
 
 <div class="card">
