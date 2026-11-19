@@ -1,0 +1,183 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Comedy Studio</title>
+<style>
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  padding: 20px;
+  background: #10101b;
+  color: white;
+  font-family: Arial, sans-serif;
+}
+.container {
+  max-width: 600px;
+  margin: auto;
+}
+h1 { color: #b99aff; margin-bottom: 5px; }
+.subtitle { color: #aaa; margin-bottom: 25px; }
+.card {
+  background: #1d1d2b;
+  padding: 18px;
+  border-radius: 15px;
+  margin-bottom: 17px;
+}
+h3 { margin-top: 0; }
+label {
+  display: block;
+  margin: 14px 0 8px;
+  color: #ddd;
+}
+input, textarea, select {
+  width: 100%;
+  padding: 12px;
+  border-radius: 9px;
+  border: 1px solid #44445a;
+  background: #29293a;
+  color: white;
+}
+textarea { min-height: 90px; resize: vertical; }
+button {
+  width: 100%;
+  padding: 15px;
+  border: 0;
+  border-radius: 10px;
+  background: #9466f5;
+  color: white;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+}
+button:active { opacity: .8; }
+.preview {
+  max-width: 100%;
+  max-height: 300px;
+  display: block;
+  margin: 12px auto;
+  border-radius: 10px;
+}
+.note {
+  color: #aaa;
+  font-size: 12px;
+  line-height: 1.5;
+}
+#status {
+  color: #c6a9ff;
+  margin-top: 15px;
+  text-align: center;
+}
+</style>
+</head>
+<body>
+<div class="container">
+
+<h1>🎬 AI Comedy Studio</h1>
+<p class="subtitle">Turn your characters into comedy stars!</p>
+
+<div class="card">
+<h3>1. Upload Character Image</h3>
+<label>Select your character</label>
+<input type="file" id="image" accept="image/*">
+<img id="imagePreview" class="preview" hidden>
+</div>
+
+<div class="card">
+<h3>2. Describe the Environment</h3>
+<textarea id="environment"
+placeholder="Example: A funny character sitting in an Indian tea shop..."></textarea>
+</div>
+
+<div class="card">
+<h3>3. Character Appearance</h3>
+<textarea id="appearance"
+placeholder="Describe clothes, hairstyle, expressions and other details..."></textarea>
+</div>
+
+<div class="card">
+<h3>4. Choose Character Style</h3>
+<select id="style">
+<option>3D Cartoon</option>
+<option>Realistic Human</option>
+<option>Anime</option>
+<option>Pixar-like 3D</option>
+<option>Other</option>
+</select>
+</div>
+
+<div class="card">
+<h3>5. Upload Comedy Audio</h3>
+<input type="file" id="audio" accept="audio/*">
+<audio id="audioPreview" controls hidden style="width:100%;margin-top:15px"></audio>
+</div>
+
+<div class="card">
+<h3>6. Video Settings</h3>
+<label>Video format</label>
+<select id="format">
+<option value="9:16">Vertical (9:16) - Reels / Shorts</option>
+<option value="16:9">Landscape (16:9) - YouTube</option>
+<option value="1:1">Square (1:1)</option>
+</select>
+</div>
+
+<div class="card">
+<h3>7. Generate Your Video</h3>
+<p class="note">
+Upload your image and audio, then prepare your video.
+The AI generation service will be connected in a later step.
+</p>
+<button onclick="generateVideo()">✨ Generate Video</button>
+<p id="status"></p>
+</div>
+
+<div class="card">
+<h3>🎥 Your Video Preview</h3>
+<p class="note">Your generated video will appear here after we connect the AI engine.</p>
+</div>
+
+<p class="note" style="text-align:center">
+AI COMEDY STUDIO · YOUR CREATIVE SPACE
+</p>
+
+</div>
+
+<script>
+const imageInput = document.getElementById("image");
+const audioInput = document.getElementById("audio");
+
+imageInput.addEventListener("change", function() {
+  const file = this.files[0];
+  if (!file) return;
+  const preview = document.getElementById("imagePreview");
+  preview.src = URL.createObjectURL(file);
+  preview.hidden = false;
+});
+
+audioInput.addEventListener("change", function() {
+  const file = this.files[0];
+  if (!file) return;
+  const preview = document.getElementById("audioPreview");
+  preview.src = URL.createObjectURL(file);
+  preview.hidden = false;
+});
+
+function generateVideo() {
+  const image = imageInput.files[0];
+  const audio = audioInput.files[0];
+  const status = document.getElementById("status");
+
+  if (!image || !audio) {
+    status.textContent = "Please upload both an image and audio first.";
+    return;
+  }
+
+  status.textContent =
+    "Your files are ready! AI video generation will be connected next.";
+}
+</script>
+</body>
+</html>
